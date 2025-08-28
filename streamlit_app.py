@@ -643,37 +643,38 @@ st.markdown("---")
 # Final summary with interactive elements
 st.markdown("## 🎓 学習のまとめ")
 
-# Create an interactive summary chart
-fig_summary = go.Figure()
-
-# Data for comparison
+# Create an interactive summary chart using bar chart instead of radar
 categories = ['ノイズ耐性', 'コピー耐性', '表現精度', '圧縮効率']
 analog_scores = [2, 1, 3, 2]  # Lower scores for analog
 digital_scores = [5, 5, 5, 4]  # Higher scores for digital
 
+fig_summary = go.Figure()
+
 fig_summary.add_trace(
-    go.Radar(r=analog_scores, theta=categories, 
-             fill='toself', name='アナログ',
-             line_color='red', fillcolor='rgba(255,0,0,0.1)')
+    go.Bar(x=categories, y=analog_scores, 
+           name='アナログ',
+           marker_color='rgba(255,0,0,0.6)',
+           text=analog_scores,
+           textposition='auto')
 )
 
 fig_summary.add_trace(
-    go.Radar(r=digital_scores, theta=categories,
-             fill='toself', name='デジタル', 
-             line_color='blue', fillcolor='rgba(0,0,255,0.1)')
+    go.Bar(x=categories, y=digital_scores,
+           name='デジタル', 
+           marker_color='rgba(0,0,255,0.6)',
+           text=digital_scores,
+           textposition='auto')
 )
 
 fig_summary.update_layout(
-    polar=dict(
-        radialaxis=dict(
-            visible=True,
-            range=[0, 5]
-        )
-    ),
     title="📊 アナログ vs デジタル 総合比較",
+    xaxis_title="比較項目",
+    yaxis_title="スコア (1-5)",
+    yaxis=dict(range=[0, 5]),
     template='plotly_white',
     height=500,
-    showlegend=True
+    showlegend=True,
+    barmode='group'
 )
 
 st.plotly_chart(fig_summary, use_container_width=True)
