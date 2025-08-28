@@ -644,9 +644,9 @@ st.markdown("---")
 st.markdown("## 🎓 学習のまとめ")
 
 # Create an interactive summary chart using bar chart instead of radar
-categories = ['ノイズ耐性', 'コピー耐性', '表現精度', '圧縮効率']
-analog_scores = [2, 1, 3, 2]  # Lower scores for analog
-digital_scores = [5, 5, 5, 4]  # Higher scores for digital
+categories = ['ノイズ耐性', 'コピー耐性', '圧縮効率']
+analog_scores = [2, 1, 2]  # Lower scores for analog
+digital_scores = [5, 5, 4]  # Higher scores for digital
 
 fig_summary = go.Figure()
 
@@ -683,8 +683,7 @@ st.markdown("""
 #### 🔑 重要なポイント
 1. **ノイズ耐性**: デジタルは0と1の判別ができるため、アナログより強い
 2. **コピー耐性**: デジタルは完全複製、アナログは劣化する  
-3. **表現力**: nビットで2^n通りの情報を表現可能
-4. **圧縮**: アナログは品質劣化、デジタルは可逆圧縮も可能
+3. **圧縮**: アナログは品質劣化、デジタルは可逆圧縮も可能
 
 🌟 これらの違いを理解することで、なぜ現代社会でデジタル技術が重要なのかが分かりますね！
 """)
