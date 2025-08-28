@@ -157,7 +157,7 @@ with col2:
     # Add success annotation for digital restoration
     if noise_level > 0:
         fig2.add_annotation(
-            text="✅ 完全復元成功！",
+            text="✅ 復元成功！",
             xref="paper", yref="paper",
             x=0.5, y=0.02, showarrow=False,
             font=dict(size=12, color="green")
@@ -166,7 +166,7 @@ with col2:
     st.plotly_chart(fig2, use_container_width=True)
     
     if noise_level > 0:
-        st.success("完全に復元できた！ ✨")
+        st.success("ある程度復元できた！ ✨")
         st.write("しきい値で0と1を判別できます")
     else:
         st.info("クリアなデジタル信号です")
