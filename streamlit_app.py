@@ -8,13 +8,13 @@ import random
 
 # Page configuration
 st.set_page_config(
-    page_title="アナログとデジタルの違い",
+    page_title="アナログとデジタル",
     page_icon="🌊",
     layout="wide"
 )
 
 # Main title and credits
-st.title("アナログとデジタルの違い 🌊💻")
+st.title("アナログとデジタル（pp.138-139）")
 st.caption("Created by Dit-Lab.(Daiki ITO)")
 st.caption("Supported by Tomoaki ATSUMI")
 
