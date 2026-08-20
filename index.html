@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>アナログとデジタル｜情報Ⅰ共通テスト対策問題集</title>
+<meta name="description" content="連続した量を段階に区切るのがデジタル化です。区切りの細かさを変えながら、失われるものと得られるものを確かめましょう。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 fill=%22%2315181c%22/%3E%3Ctext x=%2216%22 y=%2222%22 font-size=%2218%22 font-family=%22monospace%22 fill=%22%23fff%22 text-anchor=%22middle%22%3E01%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+
+<header class="app-header">
+  <div class="inner">
+    <span class="eyebrow">第 5 章　デジタル　5-1</span>
+    <h1>アナログとデジタル（pp.138-139）</h1>
+    <p class="lead">連続した量を段階に区切るのがデジタル化です。区切りの細かさを変えながら、失われるものと得られるものを確かめましょう。</p>
+    <p class="credit">Created by Dit-Lab.(Daiki ITO)　/　Supported by Tomoaki ATSUMI</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="step" id="step1">
+    <h2><span class="no">STEP 1</span>連続した量を段階に区切る</h2>
+    <p class="desc"><span class="term" data-t="アナログ">アナログ</span>は連続、<span class="term" data-t="デジタル">デジタル</span>は段階です。<strong>区切りを細かくするほど元の形に近づきます</strong>。</p>
+
+    <div class="panel">
+      <div class="grid c2">
+        <div>
+          <label class="fld" for="levels">段階の数（量子化）：<span class="mono" id="levelsV">4</span> 段階</label>
+          <input type="range" id="levels" min="2" max="64" step="1" value="4">
+          <label class="fld" style="margin-top:10px" for="samples">区切る回数（標本化）：<span class="mono" id="samplesV">12</span> 回</label>
+          <input type="range" id="samples" min="4" max="80" step="1" value="12">
+          <div class="metrics" style="margin-top:14px">
+            <div class="metric"><div class="k">1個あたりに必要なビット数</div><div class="v" id="mBits">—</div><div class="s">ビット</div></div>
+            <div class="metric"><div class="k">全体のデータ量</div><div class="v" id="mSize">—</div><div class="s">ビット</div></div>
+            <div class="metric"><div class="k">元の形とのずれ</div><div class="v" id="mErr">—</div><div class="s">％</div></div>
+          </div>
+          <div class="note" id="waveNote" style="margin-top:12px"></div>
+        </div>
+        <div id="waveBox"></div>
+      </div>
+      <div class="note info" style="margin-top:12px">
+        <strong>デジタル化の手順</strong>：<span class="term" data-t="標本化">標本化</span>（一定間隔で読み取る）→
+        <span class="term" data-t="量子化">量子化</span>（決められた段階に当てはめる）→ <span class="term" data-t="符号化">符号化</span>（0と1にする）。
+      </div>
+    </div>
+  </section>
+
+  <section class="step" id="step2">
+    <h2><span class="no">STEP 2</span>なぜデジタルは劣化しないのか</h2>
+    <p class="desc">同じノイズが乗ったとき、アナログとデジタルで何がちがうのかを見てください。</p>
+    <div class="panel">
+      <label class="fld" for="noise">ノイズの大きさ：<span class="mono" id="noiseV">20</span> ％</label>
+      <input type="range" id="noise" min="0" max="60" step="5" value="20">
+      <div id="noiseBox" style="margin-top:12px"></div>
+      <div class="note" id="noiseNote" style="margin-top:12px"></div>
+      <div class="btn-row" style="margin-top:12px">
+        <button class="btn" id="reNoise">ノイズをかけ直す</button>
+      </div>
+      <p class="why" style="margin-top:10px">
+        デジタルは「0か1か」しかないので、<strong>しきい値（まん中の線）より上か下か</strong>で判定すれば元にもどせます。
+        アナログはノイズがそのまま信号のずれになり、<strong>コピーのたびに劣化</strong>します。
+      </p>
+    </div>
+  </section>
+
+  <section class="step" id="step3">
+    <h2><span class="no">STEP 3</span>何種類を区別するのに何ビット必要か</h2>
+    <p class="desc">nビットで表せるのは <span class="mono">2ⁿ</span> 通り。<strong>必要な種類数以上になる最小のn</strong>を求めます。</p>
+    <div class="panel">
+      <div class="btn-row" style="margin-bottom:12px">
+        <button class="btn sm" data-kinds="62">A〜Z・a〜z・0〜9（62種類）</button>
+        <button class="btn sm" data-kinds="26">アルファベット大文字だけ（26）</button>
+        <button class="btn sm" data-kinds="10">数字だけ（10）</button>
+        <button class="btn sm" data-kinds="256">256種類</button>
+      </div>
+      <label class="fld" for="kinds">区別したい種類の数：<span class="mono" id="kindsV">62</span></label>
+      <input type="range" id="kinds" min="2" max="1024" step="1" value="62">
+      <div class="bitcalc" id="bitCalc" style="margin-top:12px"></div>
+      <div class="tbl-scroll" style="margin-top:12px"><table class="tbl" id="powTable"></table></div>
+    </div>
+  </section>
+
+  <section class="step" id="step4">
+    <h2><span class="no">STEP 4</span>確認クイズ</h2>
+    <div class="panel">
+      <div class="qhead">
+        <span class="badge" id="qProgress">1 / 1</span>
+        <span class="badge">正解 <span class="score" id="qScore">0</span></span>
+      </div>
+      <div class="card-q"><div class="q-scene" id="qText"></div></div>
+      <div class="choice4" id="qChoices"></div>
+      <div class="note" id="qFb" hidden style="margin-top:12px"></div>
+      <div class="btn-row" style="margin-top:12px">
+        <button class="btn primary" id="qNext" disabled>次の問題</button>
+        <button class="btn ghost" id="qReset">最初から</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="step" id="glossary">
+    <h2><span class="no">用語</span>この節で出てくることば</h2>
+    <div id="glossBox"></div>
+  </section>
+
+  <section class="step">
+    <h2><span class="no">まとめ</span>アナログとデジタルのポイント</h2>
+    <ul style="margin:0;padding-left:1.2em;color:var(--ink-2);font-size:.92rem;line-height:2.05">
+      <li>アナログ＝<strong>連続した量</strong>（長さ・角度・電圧）、デジタル＝<strong>段階に区切った数値</strong>。</li>
+      <li>CDは音を<strong>デジタルデータ</strong>として記録する光ディスクです。</li>
+      <li>デジタルは<strong>コピーしても劣化せず</strong>、しきい値でノイズから復元できる。</li>
+      <li>いろいろなメディア（文字・音・画像）を<strong>同じ0と1で統合的に扱える</strong>。</li>
+      <li>ただし<strong>元のアナログを完全に再現できるとは限らない</strong>。段階に区切った時点で情報の一部は失われる。</li>
+      <li>n種類を区別するには <span class="mono">2ⁿ ≧ n種類</span> となる最小のビット数が必要。</li>
+    </ul>
+  </section>
+
+  <section class="step">
+    <h2><span class="no">活用</span>授業・探究での使い方</h2>
+    <div class="use-note">
+      <h3>授業で</h3>
+      <ul>
+        <li>STEP 1 のスライダーで段階数を変え、粗いデジタル化では波形が崩れることを見せる。</li>
+        <li>STEP 2 のノイズ実験は、デジタルが劣化しない理由を示す決め手になる。</li>
+        <li>STEP 3 の必要ビット数の計算は、2のn乗と結びつけて練習できる。</li>
+      </ul>
+      <h3 style="margin-top:12px">探究で</h3>
+      <ul>
+        <li>身のまわりのアナログな道具とデジタルな道具を挙げ、それぞれの長所短所を整理する。</li>
+        <li>デジタル化で失われる情報があることを、実際の波形の比較から説明する。</li>
+        <li>何種類のものを区別するのに何ビット必要か、いろいろな場面で計算してみる。</li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<footer class="app-footer">
+  情報Ⅰ 共通テスト対策問題集（技術評論社）連動Webアプリ　/　Created by Dit-Lab.(Daiki ITO)　/　Supported by Tomoaki ATSUMI
+</footer>
+
+<script src="js/tools.js"></script>
+<script src="js/chart.js"></script>
+<script src="js/terms.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
