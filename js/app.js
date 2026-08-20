@@ -188,6 +188,12 @@
     $('qScore').textContent = qScore; $('qNext').disabled = false;
   }
 
+  /* 本文の問題 */
+  function drawBook() {
+    if (!document.getElementById('bookBox')) return;
+    window.Quiz.choice('bookBox', 'bookNote', [{"k": "ア", "q": "【a】連続する可変な物理量で表したもの／【b】離散的な数値で表したもの／【c】CDが格納するデータ の組合せは。", "ch": ["a アナログ／b デジタル／c アナログ", "a アナログ／b デジタル／c デジタル", "a デジタル／b アナログ／c アナログ", "a デジタル／b アナログ／c デジタル"], "a": 1, "why": "連続がアナログ、離散がデジタル。CDは<strong>デジタル</strong>で記録します（カセットテープはアナログ）。"}, {"k": "イ", "q": "デジタルデータに関する説明として<strong>適当でない</strong>ものは。", "ch": ["コピーを繰り返しても劣化しない", "さまざまな表現メディアを統合的に扱うことができる", "必ず元のアナログデータを完全に再現することができる", "ノイズが混入しても、しきい値を設けることで復元できる"], "a": 2, "why": "標本化・量子化のときに<strong>必ず切り捨てが起こる</strong>ので、完全な再現はできません。「必ず」「完全に」は要注意の言い回しです。"}, {"k": "ウ", "q": "A〜Z、a〜z、0〜9をすべて区別するには、少なくとも何ビット必要か。", "ch": ["3", "4", "5", "6", "7", "8"], "a": 3, "why": "26＋26＋10＝62種類。2⁵＝32では足りず、2⁶＝64で足りるので<strong>6ビット</strong>です。"}], "本文の答えは【ア】①　【イ】②　【ウ】6 です。");
+  }
+
   function init() {
     ['levels', 'samples'].forEach(i => $(i).addEventListener('input', drawWave));
     $('noise').addEventListener('input', drawNoise);
@@ -200,6 +206,7 @@
     $('qReset').addEventListener('click', startQuiz);
     window.Terms.glossary($('glossBox'), ['アナログ', 'デジタル', '標本化', '量子化', '符号化', '2進法', '可逆圧縮', '非可逆圧縮']);
     drawWave(); drawNoise(); drawBits(); startQuiz();
+    drawBook();
     window.Terms.attach();
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
